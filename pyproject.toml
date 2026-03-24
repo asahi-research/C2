@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=80.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "c2"
+version = "0.1.0"
+description = "Standalone implementation of C2: Cooperative yet Critical Reward Modeling."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "accelerate>=1.10.1",
+    "datasets>=4.1.0",
+    "deepspeed>=0.17.5",
+    "torch",
+    "transformers",
+    "trl>=0.23.0",
+    "vllm>=0.8.5.post1",
+]
+
+[project.scripts]
+c2-synthesize-rubrics = "c2.synthesize_rubrics:main"
+c2-train-generator-dpo = "c2.train_generator_dpo:main"
+c2-train-verifier-grpo = "c2.train_verifier_grpo:main"
+c2-infer = "c2.infer:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
