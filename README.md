@@ -8,16 +8,15 @@ At test time, a rubric generator trained on synthesized rubrics collaborates wit
 
 ## Abstract
 
-Rubric-augmented verification can act as a more reliable proxy for human judgment than single-model verification.
-However, most methods require rubric annotations on top of binary preferences, making them less scalable than conventional reward modeling.
-We propose Cooperative yet Critical reward modeling (C2), a framework that realizes rubric-augmented verification from binary preferences alone.
-C2 synthesizes contrastive rubric pairs (helpful versus misleading) by measuring how each rubric shifts the verifier's confidence toward or away from the correct preference.
-From this augmented dataset, we jointly train a cooperative rubric generator that proposes criteria to guide the verifier, and a critical verifier that reasons about rubric validity before making its judgment.
-This is motivated by our finding that low-quality rubrics do more harm than help.
-At inference time, the verifier selectively follows rubrics it deems helpful and reverts to rubric-free evaluation otherwise.
-C2 outperforms reasoning reward models trained on the same binary preferences, with gains of up to 6.5 points on RM-Bench and 6.0 points length-controlled win rate on AlpacaEval 2.0.
-Without external rubric annotations, C2 enables an 8B reward model to match performance achieved with rubrics from a 4× larger model.
-Our work demonstrates that eliciting cooperation between models enables verification beyond single-model capabilities.
+Rubric-augmented verification guides reward models with explicit evaluation criteria, yielding more reliable judgments than single-model verification. 
+However, most existing methods require costly rubric annotations, limiting scalability. 
+Moreover, we find rubric generation is vulnerable to a failure of cooperation; low-quality rubrics actively mislead reward models rather than help. 
+We propose Cooperative yet Critical reward modeling (C2), a framework that significantly improves reward model judgments by having them collaborate with a rubric generator trained solely from binary preferences. 
+In C2, we synthesize helpful and misleading rubric pairs by measuring how each rubric shifts the reward model toward or away from the correct preference. 
+Using these contrastive pairs, we train a cooperative rubric generator to propose helpful rubrics, and a critical verifier to assess rubric validity before making its judgment, enabling the verifier to selectively follow only rubrics it deems helpful at inference time. 
+C2 outperforms reasoning reward models trained on the same binary preferences, with gains of up to 6.5 points on RM-Bench and 6.0 points length-controlled win rate on AlpacaEval 2.0. 
+Without external rubric annotations, C2 enables an 8B reward model to match performance achieved with rubrics from a 4× larger model. 
+Overall, our work demonstrates eliciting deliberate cooperation in rubric-augmented verification makes reward models more trustworthy in a scalable way.
 
 ## Installation
 
