@@ -10,13 +10,13 @@ At test time, a rubric generator trained on synthesized rubrics collaborates wit
 
 Rubric-augmented verification guides reward models with explicit evaluation criteria, yielding more reliable judgments than single-model verification. 
 However, most existing methods require costly rubric annotations, limiting scalability. 
-Moreover, we find rubric generation is vulnerable to a failure of cooperation; low-quality rubrics actively mislead reward models rather than help. 
-We propose Cooperative yet Critical reward modeling (C2), a framework that significantly improves reward model judgments by having them collaborate with a rubric generator trained solely from binary preferences. 
+Moreover, we find that rubric generation is vulnerable to a failure of cooperation; low-quality rubrics actively mislead reward models rather than help. 
+Inspired by the principle of cooperative communication, we propose Cooperative yet Critical reward modeling (C2), a framework that significantly improves reward model judgments by having them collaborate with a rubric generator trained solely from binary preferences. 
 In C2, we synthesize helpful and misleading rubric pairs by measuring how each rubric shifts the reward model toward or away from the correct preference. 
-Using these contrastive pairs, we train a cooperative rubric generator to propose helpful rubrics, and a critical verifier to assess rubric validity before making its judgment, enabling the verifier to selectively follow only rubrics it deems helpful at inference time. 
+Using these contrastive pairs, we train a cooperative rubric generator to propose helpful rubrics, and a critical verifier to assess rubric validity before making its judgment, following only rubrics it deems helpful at inference time. 
 C2 outperforms reasoning reward models trained on the same binary preferences, with gains of up to 6.5 points on RM-Bench and 6.0 points length-controlled win rate on AlpacaEval 2.0. 
 Without external rubric annotations, C2 enables an 8B reward model to match performance achieved with rubrics from a 4× larger model. 
-Overall, our work demonstrates eliciting deliberate cooperation in rubric-augmented verification makes reward models more trustworthy in a scalable way.
+Overall, our work demonstrates that eliciting deliberate cooperation in rubric-augmented verification makes reward models more trustworthy in a scalable way.
 
 ## Installation
 
@@ -37,7 +37,7 @@ This installs the package and exposes the following CLI entry points:
 
 ### Input data
 
-The loader accepts one pairwise format:
+The loader accepts pairwise preference format:
 
 `prompt + response_a + response_b + label`
 
@@ -56,7 +56,6 @@ The loader accepts one pairwise format:
 The simplest entry point is the shell launcher:
 
 ```bash
-cd C2
 bash scripts/run_c2.sh \
   --model-name allenai/Llama-3.1-Tulu-3-8B-SFT \
   --dataset-path /path/to/pairwise_train.jsonl \
